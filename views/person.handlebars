@@ -1,0 +1,108 @@
+ <script src="/static/javascript/person.js"></script>
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-9 page-title">
+				<p id="title">Congregation Peace & Brotherhood of Monastir Inc.</p>
+			</div>
+			<div class="col-md-3 links" style="display:inline-flex;">
+				<p id="home-link"><a href="/">Home</a></p>
+				<p id="contact-link"><a>Contact</a></p>
+			</div>
+		</div>
+	</div>
+</nav>
+<div class="text-center">
+	<h1>{{name}}</h1>
+	<img src="/static/images/{{picture}}" height="400" width="350" />
+	<br>
+	<div class="text-center" id="kaddish-buttons">
+		<h3>Mourners Kadish</h3>
+		<button id="mourners-english-button">English</button>
+		<button id="mourners-hebrew-phonetic-button">Hebrew Phonetic</button>
+		<button id="mourners-hebrew-button">Hebrew</button>
+	</div>
+</div>
+<div id="mourners-english-modal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+	  <div class = "modal-content">
+	   	<div class = "modal-header">
+	    	<button type="button" class="close" data-dismiss="modal">&times;</button>
+		</div>
+	    <div class = "modal-body">
+	    	<h5>May His illustrious name become increasingly great and holy</h5>
+	    	<h5>In the world that He created according to His will, and may He establish His kingdom</h5>
+	    	<h5>And may His salvation flourish and the Messiah come soon</h5>
+	    	<h5>In your lifetime and in your days and in the lifetime of all the house of Israel</h5>
+	    	<h5>Speedily and soon. And say amen</h5>
+	    	<br>
+	    	<h5>May His illustrious name be blessed always and forever.</h5>
+	    	<h5>Blessed, praised, glorified, exalted, extolled</h5>
+	    	<h5>Honored, raised up and acclaimed be the name of the Holy one blessed be He</h5>
+	    	<br>
+	    	<h5>beyond every blessing hymn, praise and consolation that is uttered in the world.</h5>
+	    	<h5>And say amen</h5>
+	    	<br>
+	    	<h5>May abundant peace from heaven, and good life</h5>
+	    	<h5>Be upon us and upon all Israel. And say amen</h5>
+	    	<br>
+	    	<h5>May He who makes peace in His high places</h5>
+	    	<h5>Make peace upon us and upon all Israel,<h5>
+	    	<h5>And say amen</h5>
+	    </div>
+	    <div class = "modal-footer">
+	    	<button type="button" class="btn btn-default center-block bottom-button" data-dismiss="modal">Close</button>
+	    </div>
+	  </div>
+	</div>
+</div>
+<div id="mourners-hebrew-phonetic-modal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+	  <div class = "modal-content">
+	   	<div class = "modal-header">
+	    	<button type="button" class="close" data-dismiss="modal">&times;</button>
+		</div>
+	    <div class = "modal-body">
+	    	<h5>Yitgadal veyitkadash shemey raba</h5>
+	    	<h5>Be'olma di'vera chir'utey veyamlich malchutey</h5>
+	    	<h5>Ve'yatzmach purkaney vi'ykarev meshichey</h5>
+	    	<h5>Bechayeychon u'veyomeychon</h5>
+	    	<h5>u'vechayey di chol beyt yisrael</h5>
+	    	<h5>Ba'agala u'vizman kariv ve'imru amen</h5>
+	    	<br>
+	    	<h5>Yehey sh'mey raba mevorach le'olam u'le'olmey olmaya</h5>
+	    	<h5>Yitbarach ve'yishtabach ve'yitpa'ar ve'yitromam</h5>
+	    	<h5>ve'yitnasey</h5>
+	    	<h5>Ve'yithadar ve'yit'aleh ve'yiythalal</h5>
+	    	<h5>she'mey dikudsha b'rich hu</h5>
+	    	<h5>Le'ela min kol birchata ve'shirata tushbechata</h5>
+	    	<h5>ve'nechemata</h5>
+	    	<h5>Da'amiran be'olma ve'imru amen</h5>
+	    	<br><br>
+	    	<h5>Yehey sh'lama raba min shemaya ve'chayim tovim</h5>
+	    	<h5>Aleynu ve'al kol yisrael ve'imru amen</h5>
+	    	<h5>O'seh shalom bimromav</h5>
+	    	<h5>hu ya'aseh shalom aleynu ve'al kol yisrael</h5>
+	    	<h5>ve'imru amen.</h5>
+	    </div>
+	    <div class = "modal-footer">
+	    	<button type="button" class="btn btn-default center-block bottom-button" data-dismiss="modal">Close</button>
+	    </div>
+	  </div>
+	</div>
+</div>
+<div id="mourners-hebrew-modal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+	  <div class = "modal-content">
+	   	<div class = "modal-header">
+	    	<button type="button" class="close" data-dismiss="modal">&times;</button>
+		</div>
+	    <div class = "modal-body text-center">
+	    	<img src="/static/images/mourners-hebrew.jpeg" height="500" width="450"/>
+	    </div>
+	    <div class = "modal-footer">
+	    	<button type="button" class="btn btn-default center-block bottom-button" data-dismiss="modal">Close</button>
+	    </div>
+	  </div>
+	</div>
+</div>
