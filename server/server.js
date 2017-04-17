@@ -67,7 +67,7 @@ app.post('/sendemail', function(req, res){
 		service: 'Gmail',
 		auth: {
 			user: 'cpsjtho@gmail.com',
-			pass: process.env.MAIL_PASS
+			pass: 'Con12Sis'
 			}
 	});
 	var mailOptions = {
