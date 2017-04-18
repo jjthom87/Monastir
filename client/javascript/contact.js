@@ -2,9 +2,6 @@ $(document).ready(function(){
 	$('#send-email').on('submit', function(e){
 		e.preventDefault();
 
-		var data = {
-		}
-
 		fetch("/sendemail", {
 			method: "post",
 			body: JSON.stringify({
