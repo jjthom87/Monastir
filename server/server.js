@@ -7,6 +7,10 @@ var nodemailer = require('nodemailer');
 
 var list = require('./../client/javascript/stone-list.js');
 
+var models = require('./../models');
+
+models.sequelize.sync();
+
 //setting up express function
 var app = express();
 
@@ -14,7 +18,11 @@ var app = express();
 var PORT = process.env.PORT || 8000;
 
 //setting up bady parser for json objects
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({ 
+	limit: '50mb',
+	extended: true, 
+	parameterLimit:50000}));
 app.use(bodyParser.text());
 app.use(bodyParser.json());
 
@@ -36,6 +44,21 @@ app.get('/contact', function(req, res){
 
 app.get('/list', function(req,res){
 	res.json(list);
+});
+
+app.get('/data', function(req,res){
+	res.render('data');
+});
+
+app.post('/datapost', function(req,res){
+	models.Data.create({
+		first: req.body.first,
+		last: req.body.last,
+		image: req.body.image
+	}).then(function() {
+		}).catch(function(err){
+			throw err;
+		});
 })
 
 app.get('/finder/:id', function(req,res){
