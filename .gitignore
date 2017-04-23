@@ -1,4 +1,4 @@
 node_modules
 .env
-client/images/grave_images/*
-client/images/grave_images/*.*
+client/grave_images/*
+client/grave_images/*.*
