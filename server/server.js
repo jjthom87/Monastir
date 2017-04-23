@@ -43,7 +43,16 @@ app.get('/contact', function(req, res){
 });
 
 app.get('/list', function(req,res){
-	res.json(list);
+	models.Data.findAll({}).then(function(all){
+		var arr = [];
+		all.forEach(function(a){
+			arr.push({
+				name: a.first + " " + a.last,
+				id: a.id
+			});
+		})
+		res.json(arr);
+	})
 });
 
 app.get('/data', function(req,res){
@@ -59,30 +68,25 @@ app.post('/datapost', function(req,res){
 		}).catch(function(err){
 			throw err;
 		});
-})
+});
+
+
 
 app.get('/finder/:id', function(req,res){
-	for(var i = 0; i < list.length; i++){
-		if(req.params.id == list[i].id){
-			var data = {
-				name: list[i].first_name + " " + list[i].last_name,
-				picture: list[i].picture
-			}
-			res.render('person', data)
+	models.Data.findOne({where: {id: req.params.id}}).then(function(data){
+		var person = {
+			name: data.first + " " + data.last,
+			picture: data.image
 		}
-	}
+		res.render('person', person)
+	});
 })
 
 app.get('/person/:id', function(req,res){
-	for(var i = 0; i < list.length; i++){
-		if(req.params.id == list[i].id){
-			var data = {
-				id: list[i].id,
-				name: list[i].first_name + " " + list[i].last_name,
-			}
-			res.json(data)
-		}
-	}
+	models.Data.findOne({where: {id: req.params.id}}).then(function(data){
+		console.log(data.id)
+		res.json(data.id)
+	});
 })
 
 app.post('/sendemail', function(req, res){
