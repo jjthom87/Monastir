@@ -47,7 +47,7 @@ $(document).ready(function() {
 			data: JSON.stringify({
 				first: $('#first_name_input').val(),
 				last: $('#last_name_input').val(),
-				image: data.image
+				image: $('#image_input').val()
 			}),
 			headers: {
 				'content-type': 'application/json'
