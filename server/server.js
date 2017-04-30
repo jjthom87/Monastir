@@ -5,10 +5,14 @@ var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
 var nodemailer = require('nodemailer');
 
+const keyPublishable = process.env.PUBLISHABLE_KEY;
+const keySecret = process.env.SECRET_KEY;
+
+const stripe = require("stripe")(keySecret);
+
 var list = require('./../client/javascript/stone-list.js');
 
 var models = require('./../models');
-
 models.sequelize.sync();
 
 //setting up express function
@@ -70,13 +74,12 @@ app.post('/datapost', function(req,res){
 		});
 });
 
-
-
 app.get('/finder/:id', function(req,res){
 	models.Data.findOne({where: {id: req.params.id}}).then(function(data){
 		var person = {
 			name: data.first + " " + data.last,
-			picture: data.image
+			picture: data.image,
+			publishKey: keyPublishable
 		}
 		res.render('person', person)
 	});
@@ -84,7 +87,6 @@ app.get('/finder/:id', function(req,res){
 
 app.get('/person/:id', function(req,res){
 	models.Data.findOne({where: {id: req.params.id}}).then(function(data){
-		console.log(data.id)
 		res.json(data.id)
 	});
 })
@@ -110,6 +112,26 @@ app.post('/sendemail', function(req, res){
 	    }
 	    res.json(info);
 	});
+});
+
+app.post("/donate", (req, res) => {
+  let amount = req.body.amount * 100;
+
+  stripe.customers.create({
+     email: req.body.stripeEmail,
+    source: req.body.stripeToken
+  })
+  .then(customer =>
+    stripe.charges.create({
+      amount,
+      description: "Sample Charge",
+         currency: "usd",
+         customer: customer.id
+    }))
+  .then(charge => 
+  	res.redirect('/'))
+  .catch(err =>
+  	alert(err))
 });
 
 //having the server listen to the port in order to communicate the front end with the back end

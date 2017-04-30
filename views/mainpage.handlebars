@@ -1,4 +1,7 @@
- <script src="/static/javascript/mainpage.js"></script>
+ <link rel="stylesheet" href="/static/css/stripe_form.css">
+<script src="https://js.stripe.com/v3/"></script>
+<script src="/static/javascript/mainpage.js"></script>
+ <script src="/static/javascript/stripe_form.js"></script>
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="row">
@@ -21,6 +24,77 @@
 	</div>
 	<br>
 </div>
+<div class="text-center">
+	<button id="donate_button">Donate</button>
+</div>
+<div id="donate_modal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+	  <div class = "modal-content">
+	   	<div class = "modal-header">
+	    	<button type="button" class="close" data-dismiss="modal">&times;</button>
+	    	<h4 class="text-center">Donate to the Monastir Society</h4>
+		</div>
+		<div class = "modal-body">
+			<div class="text-center">
+			<!--
+				<form method="post" action="/donate">
+				  <div class="group">
+				    <label class="stripe_form_label">
+				      <span>Name</span>
+				      <input id="donator_name" name="cardholder-name" class="field" placeholder="Jane Doe" />
+				    </label>
+				    <label class="stripe_form_label">
+				      <span>Phone</span>
+				      <input class="field" placeholder="(123) 456-7890" type="tel" />
+				    </label>
+				  </div>
+				  <div class="group">
+				    <label class="stripe_form_label">
+				      <span>Card</span>
+				      <div id="card-element" class="field"></div>
+				    </label>
+				  </div>
+				  <div class="group">
+				    <label class="stripe_form_label" style="display: inline-flex">
+  						<input class="donate_radio" type="radio" name="amount" value="1">
+  						<p>1</p>
+  						<input class="donate_radio" type="radio" name="amount" value="5">
+  						<p>5</p>
+  						<input class="donate_radio" type="radio" name="amount" value="10">
+  						<p>10</p>
+  					</label>
+  				  </div>
+				  <button id="stripe_form_button" type="submit">Pay <p style="display: inline-flex" id="donation_amount"></p></button>
+				  <div class="outcome">
+				    <div class="error"></div>
+				    <div class="success">
+				      Success! Your Stripe token is <span class="token"></span>
+				    </div>
+				  </div>
+				</form>
+				-->
+				<form action="/donate" method="POST">
+					<input type="number" id="custom-donation-amount" name="amount" min="0" step="1.00" placeholder="Enter amount in USD" />
+					<br><br>
+				  <script
+				    src="https://checkout.stripe.com/checkout.js" 
+				    class="stripe-button"
+				    data-key="pk_test_Spaho4YjalAEzClSviZzIJCw"
+				    data-amount="0"
+				    data-name="Donate to Monastir Society"
+				    data-locale="auto">
+				  </script>
+				</form>
+			</div>
+	    </div>
+	    <br>
+	    <div class = "modal-footer">
+	    	<button type="button" class="btn btn-default center-block bottom-button" data-dismiss="modal">Close</button>
+	    </div>
+	  </div>
+	</div>
+</div>
+<br><br>
 <hr>
 <footer>
 	<p class="text-center">Congregation Peace & Brotherhood of Monastir Inc.</p>
