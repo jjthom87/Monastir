@@ -50,6 +50,7 @@ router.post('/datapost', function(req,res){
 router.get('/finder/:id', function(req,res){
 	models.Data.findOne({where: {id: req.params.id}}).then(function(data){
 		var person = {
+			id: data.id,
 			name: data.first + " " + data.last,
 			picture: data.image,
 			publishKey: keyPublishable
@@ -59,8 +60,12 @@ router.get('/finder/:id', function(req,res){
 })
 
 router.get('/person/:id', function(req,res){
-	models.Data.findOne({where: {id: req.params.id}}).then(function(data){
-		res.json(data.id)
+	models.Rock.findAll({where: {DatumId: req.params.id}}).then(function(rockers){
+		var rocks = [];
+		rockers.forEach(function(rocker){
+			rocks.push(rocker.poster)
+		})
+		res.json(rocks);
 	});
 })
 
@@ -105,6 +110,17 @@ router.post("/donate", (req, res) => {
   	res.redirect('/'))
   .catch(err =>
   	alert(err))
+});
+
+router.post("/postMessage", (req, res) => {
+  	models.Rock.create({
+  		DatumId: req.body.id,
+		poster: req.body.name,
+		message: req.body.message,
+	}).then(function() {
+		}).catch(function(err){
+			throw err;
+		});
 });
 
 module.exports = router;

@@ -29,21 +29,42 @@ $(document).ready(function(){
 		}
 	})
 
+	$.ajax({
+		type: 'GET',
+		url: "/person/" + $('#stone-button').data("id"),
+		contentType: 'application/json',
+		success: function(data){
+			if(data){
+				$('#stones').html(data.join(" "));
+			}
+		}
+	});
+
+
+
 	$('#stone-form').on('submit', function(e){
 		e.preventDefault();
 		$.ajax({
 			url: "/postMessage",
 			type: "post",
 			data: JSON.stringify({
+				id: $('#stone-button').data("id"),
 				name: $('#stone-name').val(),
 				message: $('#stone-message').val()
 			}),
 			headers: {
 				'content-type': 'application/json'
 			}
-		}).then((response) => response.json())
-		.then((results) => {
-		});
+		}).then((response) => response.json());
 
-	})
+		$('#stones').append(" " + $('#stone-name').val())
+
+		$('#stone-name').val('');
+		$('#stone-message').val('');
+		$('#stone-form').hide();
+		$('#success-message').text('Stone Placed').fadeIn(5000).fadeOut(5000);
+
+		$('#stone-button').prop("disabled", true);
+	});
+
 });

@@ -1,18 +1,19 @@
 $(document).ready(function(){
-	var all = []
-	$.ajax({
-		type: 'GET',
-		url: '/list',
-		contentType: 'application/json'
-	}).done(function(response){
-		response.forEach(function(r){
-			all.push({
-				label: r.name, 
-				value: r.name.toLowerCase(), 
-				id: r.id
-			});
-		});
-	});
+  
+  	var all = []
+  	$.ajax({
+  		type: 'GET',
+  		url: '/list',
+  		contentType: 'application/json'
+  	}).done(function(response){
+  		response.forEach(function(r){
+  			all.push({
+  				label: r.name, 
+  				value: r.name.toLowerCase(), 
+  				id: r.id
+  			});
+  		});
+  	});
 
     $( "#person-search" ).autocomplete({
       source: function(request, response) {

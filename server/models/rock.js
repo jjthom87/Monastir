@@ -5,13 +5,11 @@ module.exports = function (sequelize, DataTypes) {
 		},
 		poster: {
 			type: DataTypes.STRING,
-		},
-		duplicate: {
-			type: DataTypes.BOOLEAN
 		}
   }, {
     classMethods: {
       associate: function(models) {
+      	Rock.belongsTo(models.Data)
       }
     }
   });

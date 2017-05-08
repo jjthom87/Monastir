@@ -7,9 +7,6 @@ var exphbs = require('express-handlebars');
 
 var routes = require('./controllers/route-controller.js')
 
-// var models = require('./../models');
-// models.sequelize.sync();
-
 //setting up express function
 var app = express();
 
@@ -39,4 +36,4 @@ app.set('views', path.resolve(__dirname,'../client/views'));
 app.use('/', routes);
 
 //having the server listen to the port in order to communicate the front end with the back end
-app.listen(PORT, function(){});
+app.listen(PORT);
