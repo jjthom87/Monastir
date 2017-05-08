@@ -15,7 +15,11 @@ $(document).ready(function(){
 	});
 
     $( "#person-search" ).autocomplete({
-      source: all,
+      source: function(request, response) {
+        var results = $.ui.autocomplete.filter(all, request.term);
+
+        response(results.slice(0, 5));
+      },
       minLength: 0,
       focus: function( event, ui ) {
         $( "#person-search" ).val( ui.item.label );
