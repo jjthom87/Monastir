@@ -17,7 +17,7 @@ $(document).ready(function(){
 		$('#mourners-hebrew-modal').modal();
 	});
 
-	$('#stone-form').hide()
+	$('#stone-form').hide();
 
 	$('#stone-button').on('click', function(){
 		showForm = true;
@@ -35,12 +35,20 @@ $(document).ready(function(){
 		contentType: 'application/json',
 		success: function(data){
 			if(data){
-				$('#stones').html(data.join(" "));
+				for(var i = 0; i < data.length; i++){
+					var img = $('<img class="stone-image" data-name="'+data[i]+'">');
+					img.attr('src', '/static/images/images.jpeg').height(100).width(100);
+					$('#stones').append(img);
+				}
 			}
 		}
 	});
 
-
+	$(document).on('mouseover', '.stone-image', function(){
+		var rect = $(this).offset();
+		$(".stones-span").css({top: rect.top, left: rect.left + 35, position:'absolute'});
+		$(".stones-span").text($(this).data('name'));
+	})
 
 	$('#stone-form').on('submit', function(e){
 		e.preventDefault();
@@ -57,7 +65,9 @@ $(document).ready(function(){
 			}
 		}).then((response) => response.json());
 
-		$('#stones').append(" " + $('#stone-name').val())
+		var img = $('<img class="stone-image" data-name="'+$('#stone-name').val()+'">');
+		img.attr('src', '/static/images/images.jpeg').height(100).width(100);
+		$('#stones').append(img)
 
 		$('#stone-name').val('');
 		$('#stone-message').val('');

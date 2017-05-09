@@ -1,0 +1,60 @@
+/*.stone-image .stones-span {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.stone-image .stones-span::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.stone-image:hover .stones-span {
+    visibility: visible;
+    opacity: 1;
+}*/
+
+/*.stones-span {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(29, 106, 154, 0.72);
+  color: #fff;
+  visibility: hidden;
+  opacity: 0;
+
+  transition: opacity .2s, visibility .2s;
+}
+
+.stone-image:hover .stones-span {
+	visibility: visible;
+	opacity: 1;
+}*/
+
+.stone-image:hover {
+  opacity: 0;
+  transition:opacity 2s;
+}
+
+.stones-span {
+	z-index: -1;
+}
