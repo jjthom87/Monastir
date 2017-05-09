@@ -36,7 +36,7 @@ $(document).ready(function(){
 		success: function(data){
 			if(data){
 				for(var i = 0; i < data.length; i++){
-					var img = $('<img class="stone-image" data-name="'+data[i]+'">');
+					var img = $('<img class="stone-image" data-name="'+data[i].poster+'" + data-message="'+data[i].message+'">');
 					img.attr('src', '/static/images/images.jpeg').height(100).width(100);
 					$('#stones').append(img);
 				}
@@ -47,7 +47,7 @@ $(document).ready(function(){
 	$(document).on('mouseover', '.stone-image', function(){
 		var rect = $(this).offset();
 		$(".stones-span").css({top: rect.top, left: rect.left + 35, position:'absolute'});
-		$(".stones-span").text($(this).data('name'));
+		$(".stones-span").html('<strong style="text-decoration: underline;">'+$(this).data('name') + '</strong><br>' + $(this).data('message'));
 	})
 
 	$('#stone-form').on('submit', function(e){

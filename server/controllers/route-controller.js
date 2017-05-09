@@ -63,7 +63,7 @@ router.get('/person/:id', function(req,res){
 	models.Rock.findAll({where: {DatumId: req.params.id}}).then(function(rockers){
 		var rocks = [];
 		rockers.forEach(function(rocker){
-			rocks.push(rocker.poster)
+			rocks.push(rocker)
 		})
 		res.json(rocks);
 	});
