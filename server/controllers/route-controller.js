@@ -93,23 +93,22 @@ router.post('/sendemail', function(req, res){
 });
 
 router.post("/donate", (req, res) => {
-  let amount = req.body.amount * 100;
 
   stripe.customers.create({
-     email: req.body.stripeEmail,
-    source: req.body.stripeToken
+     email: req.body.email,
+    source: req.body.token
   })
   .then(customer =>
     stripe.charges.create({
-      amount,
+      amount: req.body.amount * 100,
       description: "Sample Charge",
          currency: "usd",
          customer: customer.id
     }))
   .then(charge => 
-  	res.redirect('/'))
+  	res.json(charge))
   .catch(err =>
-  	alert(err))
+  	res.json(err))
 });
 
 router.post("/postMessage", (req, res) => {

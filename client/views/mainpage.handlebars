@@ -1,101 +1,134 @@
+ <link rel="stylesheet" href="/static/css/parsley.css">
  <link rel="stylesheet" href="/static/css/stripe_form.css">
-<script src="https://js.stripe.com/v3/"></script>
+<script src="https://js.stripe.com/v2/"></script>
+{{!-- <script src="https://js.stripe.com/v3/"></script> --}}
 <script src="/static/javascript/mainpage.js"></script>
- <script src="/static/javascript/stripe_form.js"></script>
-<nav class="navbar navbar-default">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-10 page-title">
-				<p id="title">Congregation Peace & Brotherhood of Monastir Inc.</p>
-			</div>
-			<div class="col-md-1 links">
-				<p id="contact-link"><a href="/contact">Contact</a></p>
+<script src="/static/javascript/stripe_form.js"></script>
+      <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
+      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+      <script src="/static/javascript/parsley.min.js"></script>
+<div class="body-wrapper">
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-10 page-title">
+					<p id="title">Congregation Peace & Brotherhood of Monastir Inc.</p>
+				</div>
+				<div class="col-md-1 links">
+					<p id="contact-link"><a href="/contact">Contact</a></p>
+				</div>
 			</div>
 		</div>
-	</div>
-</nav>
-<div class="cem-image text-center">
-	<img src="/static/images/Background.jpg" height="300" width="500"/>
-	<br><br>
-	<p id="explanation">Please type in name of individual in search box. <br>You can find a picture and the location of the gravestone</p>
-	<div class="search">
-		<input id="person-search"/>
-		<input type="hidden" id="person-id">
-	</div>
-	<br><br><br>
-</div>
-<div class="text-center">
-	<button id="donate_button">Donate</button>
-</div>
-<div id="donate_modal" class="modal fade" role="dialog">
-	<div class="modal-dialog">
-	  <div class = "modal-content">
-	   	<div class = "modal-header">
-	    	<button type="button" class="close" data-dismiss="modal">&times;</button>
-	    	<h4 class="text-center">Donate to the Monastir Society</h4>
+	</nav>
+	<div class="cem-image text-center">
+		<img src="/static/images/Background.jpg" height="300" width="500"/>
+		<br><br>
+		<p id="explanation">Please type in name of individual in search box. <br>You can find a picture and the location of the gravestone</p>
+		<div class="search">
+			<input id="person-search"/>
+			<input type="hidden" id="person-id">
 		</div>
-		<div class = "modal-body">
+		<br><br><br>
+	</div>
+	<div class="text-center">
+		<button id="donate_button">Donate</button>
+		<div id="payment_result"></div>
+	</div>
+	<div id="donate_modal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+		  <div class = "modal-content">
+		   	<div class = "modal-header">
+		    	<button type="button" class="close" data-dismiss="modal">&times;</button>
+		    	<h4 class="text-center">Donate to the Monastir Society</h4>
+			</div>
 			<div class="text-center">
-			<!--
-				<form method="post" action="/donate">
-				  <div class="group">
-				    <label class="stripe_form_label">
-				      <span>Name</span>
-				      <input id="donator_name" name="cardholder-name" class="field" placeholder="Jane Doe" />
-				    </label>
-				    <label class="stripe_form_label">
-				      <span>Phone</span>
-				      <input class="field" placeholder="(123) 456-7890" type="tel" />
-				    </label>
-				  </div>
-				  <div class="group">
-				    <label class="stripe_form_label">
-				      <span>Card</span>
-				      <div id="card-element" class="field"></div>
-				    </label>
-				  </div>
-				  <div class="group">
-				    <label class="stripe_form_label" style="display: inline-flex">
-  						<input class="donate_radio" type="radio" name="amount" value="1">
-  						<p>1</p>
-  						<input class="donate_radio" type="radio" name="amount" value="5">
-  						<p>5</p>
-  						<input class="donate_radio" type="radio" name="amount" value="10">
-  						<p>10</p>
-  					</label>
-  				  </div>
-				  <button id="stripe_form_button" type="submit">Pay <p style="display: inline-flex" id="donation_amount"></p></button>
-				  <div class="outcome">
-				    <div class="error"></div>
-				    <div class="success">
-				      Success! Your Stripe token is <span class="token"></span>
-				    </div>
-				  </div>
-				</form>
-				-->
-				<form action="/donate" method="POST">
-					<input type="number" id="custom-donation-amount" name="amount" min="0" step="1.00" placeholder="Enter amount in USD" />
-					<br><br>
-				  <script
-				    src="https://checkout.stripe.com/checkout.js" 
-				    class="stripe-button"
-				    data-key="pk_test_Spaho4YjalAEzClSviZzIJCw"
-				    data-amount="0"
-				    data-name="Donate to Monastir Society"
-				    data-locale="auto">
-				  </script>
-				</form>
+				<div class="loader-container">
+				    <img src="static/images/giphy-downsized.gif"/>
+				</div>
 			</div>
-	    </div>
-	    <br>
-	    <div class = "modal-footer">
-	    	<button type="button" class="btn btn-default center-block bottom-button" data-dismiss="modal">Close</button>
-	    </div>
-	  </div>
+			<div class = "modal-body">
+				<div class="text-center">
+					<form id="paymentForm" class="form-horizontal">
+					    <div class="form-group">
+					        <label class="col-xs-3 control-label">Amount</label>
+					        <div class="col-xs-3 inputGroupContainer">
+					            <div class="input-group">
+					                <input id="donate-amount" class="form-control" name="amount" required=""
+					                type="integer" data-parsley-type="integer" min="1" 
+					                data-parsley-min="1"/>
+					                {{!-- <span class="input-group-addon" >$</span> --}}
+					            </div>
+					        </div>
+					    </div>
+
+					    <div class="form-group">
+					        <label class="col-xs-3 control-label">Your full name</label>
+					        <div class="col-xs-5">
+					            <input id="donate-name" type="text" class="form-control" name="fullName" data-parsley-length="[8, 40]" required=""/>
+					        </div>
+					    </div>
+
+					    <div class="form-group">
+					        <label class="col-xs-3 control-label">Your email</label>
+					        <div class="col-xs-5">
+					            <input id="donate-email" type="email" class="form-control" name="email" type="email" data-parsley-type="email" required=""/>
+					        </div>
+					    </div>
+
+					    <div class="form-group">
+					        <label class="col-xs-3 control-label">Credit card number</label>
+					        <div class="col-xs-5">
+					            <input id="donate-card" class="form-control" data-stripe="number" data-parsley-minlength="16" type="integer" data-parsley-type="integer" required=""/>
+					        </div>
+					    </div>
+
+					    <div class="form-group">
+					        <label class="col-xs-3 control-label">Expiration</label>
+					        <div class="col-xs-3">
+					            <input id="donate-month" type="integer" data-parsley-length="[1, 2]" class="form-control" placeholder="Month" data-stripe="exp-month" data-parsley-type="integer" required=""/>
+					        </div>
+					        <div class="col-xs-3">
+					            <input id="donate-year" type="integer" data-parsley-length="[1, 2]"  class="form-control" placeholder="Year" data-stripe="exp-year" data-parsley-type="integer"required="" />
+					        </div>
+					    </div>
+
+					    <div class="form-group">
+					        <label class="col-xs-3 control-label">CVV</label>
+					        <div class="col-xs-2">
+					            <input id="donate-cvv" type="text" class="form-control" data-stripe="cvc" data-parsley-length="[1, 4]" required="" />
+					        </div>
+					    </div>
+				    	<br>
+						{{!-- <div id = "dialog-1" title = "Payment Status">Payment Completed</div> --}}
+					    <div class="form-group">
+					        <div class="col-xs-6 col-xs-offset-3">
+					            <button id="donate_submit" type="submit" class="btn btn-primary btn-block">Donate</button>
+					        </div>
+					    </div>
+
+					    <input type="hidden" name="token" value="" />
+					</form>
+
+
+				</div>
+		    </div>
+		    <br>
+		    <div class = "modal-footer">
+		    	<button type="button" class="btn btn-default center-block bottom-button" data-dismiss="modal">Close</button>
+		    </div>
+		  </div>
+		</div>
 	</div>
+	<br><br>
+	<hr>
+	<footer>
+		<p class="text-center">Congregation Peace & Brotherhood of Monastir Inc.</p>
+	</footer>
 </div>
-<br><br>
-<hr>
-<footer>
-	<p class="text-center">Congregation Peace & Brotherhood of Monastir Inc.</p>
-</footer>
+<script type="text/javascript">
+ function blockHtml() {
+    $('#paymentForm').hide();
+ }
+
+</script>

@@ -20,6 +20,16 @@ body {
 }
 */
 
+.loader-container {
+/*  position: absolute;
+  top: 0;
+  bottom: 0%;
+  left: 0;
+  right: 0%;*/
+  background-color: white;
+  z-index: 99;
+}
+
 .group {
   background: white;
   box-shadow: 0 7px 14px 0 rgba(49,49,93,0.10),
