@@ -1,3 +1,4 @@
+ <link rel="stylesheet" href="/static/css/stripe_form.css">
 <script src="/static/javascript/contact.js"></script>
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
@@ -18,20 +19,30 @@
 		<form id="send-email">
 			<div class="form-group">
 				<label>Name</label>
-				<input id="name-input" type="text" class="form-control"/>
+				<input id="name-input" type="text" class="form-control" data-parsley-length="[3, 40]" required="" data-parsley-type="text"/>
+			</div>
+			<div class="text-center">
+				<div class="loader-container">
+				    <img src="static/images/giphy-downsized.gif"/>
+				</div>
 			</div>
 			<div class="form-group">
 				<label>Email</label>
-				<input id="email-input" type="text" class="form-control"/>
+				<input id="email-input" type="email" data-parsley-type="email" required="" class="form-control"/>
 			</div>
 			<div class="form-group">
 				<label>Message</label>
-				<textarea style="height: 100px;"id="message-input" class="form-control"></textarea>
+				<textarea data-parsley-length="[1, 1000]" required="" style="height: 100px;"id="message-input" class="form-control"></textarea>
 			</div>
 			<br>
 			<div class="form-group">
-				<input type="submit" class="center-block btn btn-primary btn-block"/>
+				<input type="submit" id="contact_submit" class="center-block btn btn-primary btn-block"/>
 			</div>
 		</form>
 	</div>
 </div>
+<br><br>
+<hr>
+<footer>
+	<p class="text-center">Congregation Peace & Brotherhood of Monastir Inc.</p>
+</footer>

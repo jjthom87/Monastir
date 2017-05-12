@@ -1,5 +1,11 @@
 $(document).ready(function(){
+
+	$('.loader-container').hide();
+
 	$('#send-email').on('submit', function(e){
+    	var loaderImgContainer = $('.loader-container');
+		loaderImgContainer.show();
+		$('#contact_submit').prop("disabled", true);
 		e.preventDefault();
 
 		fetch("/sendemail", {
@@ -15,6 +21,7 @@ $(document).ready(function(){
 		}).then((response) => response.json())
 			.then((results) => {
 				$('#messageSentText').text('Message Sent').fadeIn(2000).fadeOut(2000);
+				window.location = "/";
 		})
 
 		$('#name-input').val('');
