@@ -15,6 +15,7 @@ var passport = require('passport');
 var session = require('express-session');
 var SequelizeStore = require('connect-session-sequelize')(session.Store);
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 var auth = require('./auth.js')
 
 router.use(cookieParser())
@@ -53,7 +54,35 @@ passport.use(new GoogleStrategy({
   					token: accessToken,
   					name: profile.displayName,
   					email: profile.emails[0].value
-  				}).then(function() {
+  				}).then(function(newUser) {
+  					return done(null, newUser)
+					}).catch(function(err){
+						console.error(err);
+					});
+  			}
+  		});
+    });
+}));
+
+passport.use(new FacebookStrategy({
+    clientID: auth.facebookAuth.clientID,
+    clientSecret: auth.facebookAuth.clientSecret,
+    callbackURL: auth.facebookAuth.callbackURL,
+    profileFields: ['id', 'emails', 'name']
+  },
+  function(accessToken, refreshToken, profile, done){
+  	process.nextTick(function(){
+  		models.User.findOne({ where: {facebookID: profile.id}}).then(function(user){
+  			if(user){
+  				return done(null, user)
+  			} else {
+  				return models.User.create({
+  					facebookID: profile.id,
+  					token: accessToken,
+  					name: profile.name.givenName + " " + profile.name.familyName,
+  					email: profile.emails[0].value
+  				}).then(function(newUser) {
+  					return done(null, newUser)
 					}).catch(function(err){
 						console.error(err);
 					});
@@ -212,5 +241,9 @@ router.get('/stripeInfo', function(req, res){
 router.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}))
 
 router.get('/auth/google/callback', passport.authenticate('google', {successRedirect: '/', failureRedirect: '/contact'}))
+
+router.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email']}));
+
+router.get('/auth/facebook/callback', passport.authenticate('facebook', {successRedirect: '/', failureRedirect: '/contact'}));
 
 module.exports = router;

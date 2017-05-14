@@ -11,7 +11,7 @@
 				<p id="contact-link" class="link"><a href="/contact">Contact</a></p>
 				{{#if user}}
 					<a href="/logout">Logout</a>
-					{{else}}
+				{{else}}
 					<p id="login-link" class="link"><a data-toggle="modal" href="#login-modal">Login</a></p>
 				{{/if}}
 			</div>
@@ -138,6 +138,7 @@
 	    	<div class="text-center">
 	    		<h3>Please Login or Sign Up</h3>
 	    		<a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google</a>
+	    		<a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
 	    	</div>
 	    </div>
 	    <div class = "modal-footer">
