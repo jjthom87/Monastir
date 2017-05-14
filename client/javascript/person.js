@@ -41,7 +41,7 @@ $(document).ready(function(){
 		url: "/person/" + id,
 		contentType: 'application/json',
 		success: function(data){
-			if(data){
+			if(data.rocks.length > 0){
 				for(var i = 0; i < data.rocks.length; i++){
 					if(data.rocks[i].UserId == data.id){
 						$('#stone-button').prop("disabled", true);
