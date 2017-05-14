@@ -5,7 +5,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
 
-var routes = require('./controllers/route-controller.js')
+var routes = require('./controllers/route-controller.js');
 
 //setting up express function
 var app = express();
