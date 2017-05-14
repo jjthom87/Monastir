@@ -20,23 +20,23 @@ var auth = require('./auth.js')
 
 router.use(cookieParser())
 router.use(session({
- secret: 'passport react',
-  store: new SequelizeStore({
-   db: models.sequelize
- }),
- resave: true,
- saveUninitialized: true
+	secret: 'monastirsociety',
+	store: new SequelizeStore({
+		db: models.sequelize
+ 	}),
+ 	resave: true,
+ 	saveUninitialized: true
 }));
 router.use(passport.initialize());
 router.use(passport.session());
 
 passport.serializeUser(function(user,done){
-  done(null, user);
- });
+	done(null, user);
+});
 
 passport.deserializeUser(function(obj,done){
-  done(null, obj);
- });
+	done(null, obj);
+});
  
 passport.use(new GoogleStrategy({
     clientID: auth.googleAuth.clientID,

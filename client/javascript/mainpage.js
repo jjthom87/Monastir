@@ -15,7 +15,7 @@ $(document).ready(function(){
   		});
   	});
 
-    $( "#person-search" ).autocomplete({
+    $("#person-search").autocomplete({
       source: function(request, response) {
         var results = $.ui.autocomplete.filter(all, request.term);
 
@@ -29,6 +29,7 @@ $(document).ready(function(){
       select: function( event, ui ) {
       	$( "#person-search" ).val(ui.item.label)
        	window.location = '/finder/'+ui.item.id
+        $( "#person-search" ).val("")
        	return false;
       },
       create: function(){

@@ -44,6 +44,38 @@ INSERT INTO `Data` VALUES (1,'Abram','Calderon','Abram_Calderon.jpg','2017-04-25
 UNLOCK TABLES;
 
 --
+-- Table structure for table `Rocks`
+--
+
+DROP TABLE IF EXISTS `Rocks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Rocks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `message` varchar(255) DEFAULT NULL,
+  `poster` varchar(255) DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  `DatumId` int(11) DEFAULT NULL,
+  `UserId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `DatumId` (`DatumId`),
+  KEY `UserId` (`UserId`),
+  CONSTRAINT `rocks_ibfk_1` FOREIGN KEY (`DatumId`) REFERENCES `Data` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `rocks_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `Users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Rocks`
+--
+
+LOCK TABLES `Rocks` WRITE;
+/*!40000 ALTER TABLE `Rocks` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Rocks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Sessions`
 --
 
@@ -68,6 +100,40 @@ LOCK TABLES `Sessions` WRITE;
 /*!40000 ALTER TABLE `Sessions` DISABLE KEYS */;
 /*!40000 ALTER TABLE `Sessions` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `Users`
+--
+
+DROP TABLE IF EXISTS `Users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `googleID` varchar(255) DEFAULT NULL,
+  `facebookID` varchar(255) DEFAULT NULL,
+  `token` varchar(255) DEFAULT NULL,
+  `salt` varchar(255) DEFAULT NULL,
+  `password_hash` varchar(255) DEFAULT NULL,
+  `createdOn` varchar(255) DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `Users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Users`
+--
+
+LOCK TABLES `Users` WRITE;
+/*!40000 ALTER TABLE `Users` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Users` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -78,4 +144,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-24 21:19:50
+-- Dump completed on 2017-05-14  3:20:17
