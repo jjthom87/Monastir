@@ -23,7 +23,7 @@
 	<div id="stones">
 		<span class="stones-span"></span>
 	</div>
-	<img src="/static/grave_images/{{picture}}" height="400" width="350" />
+	<img id="stone-pic" data-pic="{{picture}}" src="/static/grave_images/{{picture}}" height="400" width="350"/>
 	<br>
 	<div class="text-center" id="kaddish-buttons">
 		<h3>Mourners Kaddish</h3>
@@ -116,18 +116,22 @@
 	</div>
 </div>
 <br><br>
-<div id="stone" class="text-center">
-	<button id="stone-button" data-id={{id}}>Leave a Stone</button>
-	<div id="success-message"></div>
-	<form id="stone-form">
-		<br>
-		<input type="text" id="stone-name" placeholder="Full Name"/>
-		<br>
-		<textarea type="text" id="stone-message" placeholder="Message"></textarea>
-		<br>
-		<input type="submit"/>
-	</form>
-</div>
+{{#if user}}
+	<div id="stone" class="text-center">
+		<button id="stone-button" data-id={{id}}>Leave a Stone</button>
+		<div id="success-message"></div>
+		<form id="stone-form">
+			<br>
+			<textarea type="text" id="stone-message" placeholder="Message"></textarea>
+			<br>
+			<input type="submit"/>
+		</form>
+	</div>
+{{else}}
+	<div id="no-stone" class="text-center">
+		<p id="no-leave-message" data-id={{id}}>Please Login to Leave a Stone</p>
+	</div>
+{{/if}}
 <div id="login-modal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 	  <div class = "modal-content">

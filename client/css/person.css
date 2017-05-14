@@ -50,11 +50,11 @@
 	opacity: 1;
 }*/
 
-.stone-image:hover {
+/*.stone-image:hover {
   opacity: 0;
   transition:opacity 2s;
-}
+}*/
 
-.stones-span {
+/*.stones-span {
 	z-index: -1;
-}
+}*/

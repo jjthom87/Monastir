@@ -166,7 +166,7 @@ router.get('/finder/:id', function(req,res){
 			res.render('person', person)			
 		}
 	});
-})
+});
 
 router.get('/person/:id', function(req,res){
 	models.Rock.findAll({where: {DatumId: req.params.id}}).then(function(rockers){
@@ -174,9 +174,20 @@ router.get('/person/:id', function(req,res){
 		rockers.forEach(function(rocker){
 			rocks.push(rocker)
 		})
-		res.json(rocks);
+		if(req.session.passport){
+			var data = {
+				rocks: rocks,
+				id: req.session.passport.user.id
+			}
+			res.json(data);
+		} else {
+			var data = {
+				rocks: rocks
+			}
+			res.json(data);
+		}
 	});
-})
+});
 
 router.post('/sendemail', function(req, res){
 	var transporter = nodemailer.createTransport({
@@ -217,14 +228,16 @@ router.post("/donate", (req, res) => {
   		res.json(err))
 });
 
-router.post("/postMessage", (req, res) => {
+router.post("/postMessage", function(req, res){
   	models.Rock.create({
   		DatumId: req.body.id,
-		poster: req.body.name,
+		poster: req.session.passport.user.name,
 		message: req.body.message,
-	}).then(function() {
+		UserId: req.session.passport.user.id
+	}).then(function(success){
+			res.json(success)
 		}).catch(function(err){
-			throw err;
+			res.json(err);
 		});
 });
 
@@ -236,7 +249,13 @@ router.get('/logout', function(req, res){
 
 router.get('/stripeInfo', function(req, res){
 	res.json(keyPublishable)
-})
+});
+
+router.get('/stoneInfo', function(req, res){
+	if(req.session.passport){
+		res.json(req.session.passport)
+	}
+});
 
 router.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}))
 
