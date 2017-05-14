@@ -5,10 +5,11 @@
 	font-family: sans-serif;
 }
 
-#contact-link {
-	padding-left: 10px;
-}
-
 .links {
 	padding-top: 20px;
+	display: inline-flex;
+}
+
+.link {
+	padding-right: 10px;
 }

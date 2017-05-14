@@ -3,11 +3,16 @@
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-9 page-title">
+			<div class="col-md-10 page-title">
 				<p id="title">Congregation Peace & Brotherhood of Monastir Inc.</p>
 			</div>
-			<div class="col-md-3 links" style="display:inline-flex;">
-				<p id="home-link"><a href="/">Home</a></p>
+			<div class="col-md-2 links">
+				<p id="contact-link" class="link"><a href="/">Home</a></p>
+				{{#if user}}
+					<a href="/logout">Logout</a>
+					{{else}}
+					<p id="login-link" class="link"><a data-toggle="modal" href="#login-modal">Login</a></p>
+				{{/if}}
 			</div>
 		</div>
 	</div>
@@ -19,7 +24,11 @@
 		<form id="send-email">
 			<div class="form-group">
 				<label>Name</label>
-				<input id="name-input" type="text" class="form-control" data-parsley-length="[3, 40]" required="" data-parsley-type="text"/>
+				{{#if user}}
+					<input id="name-input" type="text" class="form-control" data-parsley-length="[3, 40]" value="{{name}}" data-parsley-type="text"/>
+				{{else}}
+					<input id="name-input" type="text" class="form-control" data-parsley-length="[3, 40]" required="" data-parsley-type="text"/>
+				{{/if}}
 			</div>
 			<div class="text-center">
 				<div class="loader-container">
@@ -28,7 +37,11 @@
 			</div>
 			<div class="form-group">
 				<label>Email</label>
-				<input id="email-input" type="email" data-parsley-type="email" required="" class="form-control"/>
+				{{#if user}}
+					<input id="email-input" type="email" data-parsley-type="email" value={{email}} class="form-control"/>
+				{{else}}
+					<input id="email-input" type="email" data-parsley-type="email" required="" class="form-control"/>
+				{{/if}}
 			</div>
 			<div class="form-group">
 				<label>Message</label>
@@ -39,6 +52,24 @@
 				<input type="submit" id="contact_submit" class="center-block btn btn-primary btn-block"/>
 			</div>
 		</form>
+	</div>
+</div>
+<div id="login-modal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+	  <div class = "modal-content">
+	   	<div class = "modal-header">
+	    	<button type="button" class="close" data-dismiss="modal">&times;</button>
+		</div>
+	    <div class = "modal-body">
+	    	<div class="text-center">
+	    		<h3>Please Login or Sign Up</h3>
+	    		<a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google</a>
+	    	</div>
+	    </div>
+	    <div class = "modal-footer">
+	    	<button type="button" class="btn btn-default center-block bottom-button" data-dismiss="modal">Close</button>
+	    </div>
+	  </div>
 	</div>
 </div>
 <br><br>

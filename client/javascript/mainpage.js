@@ -39,11 +39,6 @@ $(document).ready(function(){
       		}
       }
     });
-    // jQuery(document).on("click", ".donate_radio", function (event) {
-    //   if ($(this).is(':checked')){
-    //     jQuery('#donation_amount').text("$"+$(this).val());
-    //   }
-    // });
 
     $('#paymentForm').parsley();
 

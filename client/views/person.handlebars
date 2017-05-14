@@ -3,12 +3,17 @@
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-9 page-title">
+			<div class="col-md-10 page-title">
 				<p id="title">Congregation Peace & Brotherhood of Monastir Inc.</p>
 			</div>
-			<div class="col-md-3 links" style="display:inline-flex;">
-				<p id="home-link"><a href="/">Home</a></p>
-				<p id="contact-link"><a href="/contact">Contact</a></p>
+			<div class="col-md-2 links" style="display:inline-flex;">
+				<p id="home-link" class="link"><a href="/">Home</a></p>
+				<p id="contact-link" class="link"><a href="/contact">Contact</a></p>
+				{{#if user}}
+					<a href="/logout">Logout</a>
+					{{else}}
+					<p id="login-link" class="link"><a data-toggle="modal" href="#login-modal">Login</a></p>
+				{{/if}}
 			</div>
 		</div>
 	</div>
@@ -123,22 +128,26 @@
 		<input type="submit"/>
 	</form>
 </div>
+<div id="login-modal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+	  <div class = "modal-content">
+	   	<div class = "modal-header">
+	    	<button type="button" class="close" data-dismiss="modal">&times;</button>
+		</div>
+	    <div class = "modal-body">
+	    	<div class="text-center">
+	    		<h3>Please Login or Sign Up</h3>
+	    		<a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google</a>
+	    	</div>
+	    </div>
+	    <div class = "modal-footer">
+	    	<button type="button" class="btn btn-default center-block bottom-button" data-dismiss="modal">Close</button>
+	    </div>
+	  </div>
+	</div>
+</div>
 <br><br>
 <hr>
 <footer>
 	<p class="text-center">Congregation Peace & Brotherhood of Monastir Inc.</p>
 </footer>
-<!--
-<form action="/donate" method="POST">
-	<script
-	  src="https://checkout.stripe.com/checkout.js" 
-	  class="stripe-button"
-	  data-key={{publishKey}}
-	  data-amount=""
-	  data-name="Donate to Monastir"
-	  data-description=""
-	  data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-	  data-locale="auto">
-	</script>
-</form>
--->
