@@ -42,5 +42,33 @@ $(document).ready(function(){
     });
 
     $('#paymentForm').parsley();
+    $('#sign-up').parsley();
+
+    var showForm = false;
+    var count = 1;
+    $('#signUpForm').hide();
+    $('#signInForm').hide();
+
+    $('#sign-up-button').on('click', function(){
+        $('#signInForm').hide();
+        showForm = true;
+        count++;
+        if(showForm && count % 2 == 0){
+          $('#signUpForm').show();
+        } else {
+          $('#signUpForm').hide();
+        }
+    });
+
+    $('#sign-in-button').on('click', function(){
+        $('#signUpForm').hide();
+        showForm = true;
+        count++;
+        if(showForm && count % 2 == 0){
+          $('#signInForm').show();
+        } else {
+          $('#signInForm').hide();
+        }
+    });  
 
 });

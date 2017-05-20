@@ -13,6 +13,12 @@ module.exports = function(app,passport,nodemailer,stripe,keyPublishable){
 		}
 	});
 
+	app.get('/', function(req, res){
+		if(req.session.flash.incorrectPassword){
+			res.json("incorrect password")
+		}
+	});
+
 	app.get('/contact', function(req, res){
 		if(req.session.passport){
 			var name = req.session.passport.user.name.split(" ");
@@ -167,6 +173,22 @@ module.exports = function(app,passport,nodemailer,stripe,keyPublishable){
 			res.json(req.session.passport)
 		}
 	});
+
+	app.post('/signin', 
+		passport.authenticate('local-signin', {
+			successRedirect: '/',
+			failureRedirect: '/',
+			failureFlash: true
+		})	
+	);
+
+	app.post('/signup', 
+		passport.authenticate('local-signup', {
+			successRedirect: '/',
+			failureRedirect: '/',
+			failureFlash: true
+		})
+	);
 
 	app.get('/auth/google', 
 		passport.authenticate('google', {

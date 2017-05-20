@@ -12,6 +12,7 @@ var cookieParser = require('cookie-parser');
 var passport = require('passport');
 var session = require('express-session');
 var SequelizeStore = require('connect-session-sequelize')(session.Store);
+var flash = require('connect-flash');
 
 var nodemailer = require('nodemailer');
 
@@ -53,6 +54,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 
 require('./controllers/route-controller.js')(app,passport,nodemailer,stripe,keyPublishable);
 

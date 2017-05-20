@@ -7,7 +7,7 @@ module.exports = function (sequelize, DataTypes) {
 			type: DataTypes.STRING,
 		},
 		image: {
-			type: DataTypes.TEXT('long')
+			type: DataTypes.STRING
 		}
   }, {
     classMethods: {

@@ -22,6 +22,10 @@ module.exports = function (sequelize, DataTypes) {
 		token: {
 			type: DataTypes.STRING
 		},
+		uuid: {
+			type: DataTypes.UUID,
+    		defaultValue: DataTypes.UUIDV1,
+		},
 		salt: {
 			type: DataTypes.STRING
 		},
