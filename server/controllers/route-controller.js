@@ -9,13 +9,7 @@ module.exports = function(app,passport,nodemailer,stripe,keyPublishable){
 			}
 			res.render('mainpage', data);
 		} else {
-			res.render('mainpage');
-		}
-	});
-
-	app.get('/', function(req, res){
-		if(req.session.flash.incorrectPassword){
-			res.json("incorrect password")
+			res.render('mainpage');	
 		}
 	});
 
@@ -147,10 +141,9 @@ module.exports = function(app,passport,nodemailer,stripe,keyPublishable){
 
 	app.post("/postMessage", function(req, res){
 	  	models.Rock.create({
-	  		DatumId: req.body.id,
-			poster: req.session.passport.user.name,
+			poster: req.body.poster,
 			message: req.body.message,
-			UserId: req.session.passport.user.id
+			DatumId: req.body.id
 		}).then(function(success){
 				res.json(success)
 			}).catch(function(err){
@@ -174,12 +167,29 @@ module.exports = function(app,passport,nodemailer,stripe,keyPublishable){
 		}
 	});
 
+	// app.post('/signin', function(req,res,next){
+	//   passport.authenticate('local-signin', function(err, user, info){
+	//     if (err) {
+	//       return next(err);
+	//     }
+	//     if (!user) {
+	//       return res.status(401).json({ success : false, message : 'authentication failed' });
+	//     }
+	//     req.login(user, function(err){
+	//       if(err){
+	//         return next(err);
+	//       }
+	//       return res.status(200).json({ success : true, message : 'authentication succeeded' });        
+	//     });
+	//   })(req, res, next);
+	// });
+
 	app.post('/signin', 
 		passport.authenticate('local-signin', {
 			successRedirect: '/',
 			failureRedirect: '/',
 			failureFlash: true
-		})	
+		})
 	);
 
 	app.post('/signup', 
@@ -215,5 +225,11 @@ module.exports = function(app,passport,nodemailer,stripe,keyPublishable){
 			failureRedirect: '/contact'
 		})
 	);
+
+	app.get('/api/data', function(req,res){
+		models.Data.findAll().then(function(data){
+			res.json(data)
+		})
+	})
 
 }

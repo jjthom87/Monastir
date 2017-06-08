@@ -43,6 +43,7 @@ $(document).ready(function(){
 
     $('#paymentForm').parsley();
     $('#sign-up').parsley();
+    $('#sign-in').parsley();
 
     var showForm = false;
     var count = 1;
@@ -70,5 +71,37 @@ $(document).ready(function(){
           $('#signInForm').hide();
         }
     });  
+
+    // $('#sign-in').on('submit', function(e){
+    //   e.preventDefault();
+    //   fetch("/signin", {
+    //         method: "POST",
+    //         body: JSON.stringify({
+    //           email: $("input[name='sign-in-email']").val(),
+    //           password: $("input[name='sign-in-password']").val()
+    //         }),
+    //         headers: {
+    //           'content-type': 'application/json'
+    //         }
+    //       }).then((response) => response.json())
+    //         .then((results) => {
+    //           if(results.message === 'authentication failed'){
+    //             alert("Authentication Failed")
+    //           } else {
+    //             location.reload();
+    //           }
+    //       })
+    // });
+
+    // $.ajax({
+    //   type: 'GET',
+    //   url: '/api/loginfail',
+    //   contentType: 'application/json'
+    // }).done(function(response){
+    //   alert(response)
+    //   return false;
+    // });
+
+    // console.log($('.body-wrapper').find('#nouser'))
 
 });

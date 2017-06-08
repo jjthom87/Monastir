@@ -29,18 +29,19 @@ $(document).ready(function(){
 		}
 	});
 
-	var id;
-	if(!($('#no-leave-message').data("id"))){
-		id = $('#stone-button').data("id");
-	} else {
-		id = $('#no-leave-message').data("id");
-	}
+	// var id;
+	// if(!($('#no-leave-message').data("id"))){
+	// 	id = $('#stone-button').data("id");
+	// } else {
+	// 	id = $('#no-leave-message').data("id");
+	// }
 
 	$.ajax({
 		type: 'GET',
-		url: "/person/" + id,
+		url: "/person/" + $("stone-button").data("id"),
 		contentType: 'application/json',
 		success: function(data){
+
 			if(data.rocks.length > 0){
 				for(var i = 0; i < data.rocks.length; i++){
 					if(data.rocks[i].UserId == data.id){
@@ -66,26 +67,27 @@ $(document).ready(function(){
          $('#stone-pic').css("opacity", 1);
     });
 
-	$.ajax({
-		url: "/stoneInfo",
-		type: "get",
-        contentType: 'application/json',
-        success: function(data){
+	// $.ajax({
+	// 	url: "/stoneInfo",
+	// 	type: "get",
+ //        contentType: 'application/json',
+ //        success: function(data){
+ //        	console.log(data)
 			$('#stone-form').on('submit', function(e){
 				e.preventDefault();
 				$.ajax({
 					url: "/postMessage",
 					type: "post",
 					data: JSON.stringify({
-						id: $('#stone-button').data("id"),
-						message: $('#stone-message').val()
+						message: $('#stone-message').val(),
+						poster: $('#poster-name').val(),
+						id: $("stone-button").data("id")
 					}),
 					headers: {
 						'content-type': 'application/json'
 					}
 				}).then((results) => {
-					
-					var img = $('<img class="stone-image" data-name="'+data.user.name+'" data-message="'+$('#stone-message').val()+'">');
+					var img = $('<img class="stone-image" data-name="'+results.poster+'" data-message="'+$('#stone-message').val()+'">');
 					img.attr('src', '/static/images/images.jpeg').height(100).width(100);
 					$('#stones').append(img)
 
@@ -97,7 +99,7 @@ $(document).ready(function(){
 					$('#stone-button').prop("disabled", true);
 				});
 			});
-		}
-	});
+	// 	}
+	// });
 
 });

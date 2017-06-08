@@ -9,11 +9,11 @@
 			<div class="col-md-2 links" style="display:inline-flex;">
 				<p id="home-link" class="link"><a href="/">Home</a></p>
 				<p id="contact-link" class="link"><a href="/contact">Contact</a></p>
-				{{#if user}}
+{{!-- 				{{#if user}}
 					<a href="/logout">Logout</a>
 				{{else}}
 					<p id="login-link" class="link"><a data-toggle="modal" href="#login-modal">Login</a></p>
-				{{/if}}
+				{{/if}} --}}
 			</div>
 		</div>
 	</div>
@@ -116,22 +116,24 @@
 	</div>
 </div>
 <br><br>
-{{#if user}}
+{{!-- {{#if user}} --}}
 	<div id="stone" class="text-center">
 		<button id="stone-button" data-id={{id}}>Leave a Stone</button>
 		<div id="success-message"></div>
 		<form id="stone-form">
+			<br>
+			<input type="text" id="poster-name" placeholder="Your Name">
 			<br>
 			<textarea type="text" id="stone-message" placeholder="Message"></textarea>
 			<br>
 			<input type="submit"/>
 		</form>
 	</div>
-{{else}}
+{{!-- {{else}}
 	<div id="no-stone" class="text-center">
 		<p id="no-leave-message" data-id={{id}}>Please <a data-toggle="modal" href="#login-modal">Login</a> to Leave a Stone</p>
 	</div>
-{{/if}}
+{{/if}} --}}
 <div id="login-modal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 	  <div class = "modal-content">

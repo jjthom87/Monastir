@@ -13,15 +13,18 @@
 				</div>
 				<div class="col-md-2 links">
 					<p id="contact-link" class="link"><a href="/contact">Contact</a></p>
-					{{#if user}}
+{{!-- 					{{#if user}}
 						<a href="/logout">Logout</a>
   					{{else}}
 						<p id="login-link" class="link"><a data-toggle="modal" href="#login-modal">Login</a></p>
-					{{/if}}
+					{{/if}} --}}
 				</div>
 			</div>
 		</div>
 	</nav>
+	{{#if nouser}}
+		<div id="nouser"></div>
+	{{/if}}
 	<div class="cem-image text-center">
 		<img src="/static/images/Background.jpg" height="300" width="500"/>
 		<br><br>
@@ -156,17 +159,17 @@
 		    		</form>
 		    	</div>
 		    	<div id="signInForm" class="text-center well">
-		    		<form id="sign-in" action="/signin" method="POST" class="form-horizontal">
+		    		<form id="sign-in" method="post" action="/signin" class="form-horizontal">
 					    <div class="form-group">
 					        <label class="col-xs-3 control-label">Email</label>
 					        <div class="col-xs-5">
-					            <input class="form-control" name="email" type="email" data-parsley-type="email" required=""/>
+					            <input class="form-control" name="sign-in-email" type="email" data-parsley-type="email" required=""/>
 					        </div>
 					    </div>
 					    <div class="form-group">
 					        <label class="col-xs-3 control-label">Password</label>
 					        <div class="col-xs-5">
-					            <input type="password" class="form-control" name="password" data-parsley-minlength="8" required=""/>
+					            <input type="password" class="form-control" name="sign-in-password" data-parsley-minlength="8" required=""/>
 					        </div>
 					    </div>
 				    	<br>
